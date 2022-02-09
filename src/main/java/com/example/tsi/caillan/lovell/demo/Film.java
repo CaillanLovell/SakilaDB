@@ -10,26 +10,24 @@ public class Film {
     @Id
     @GeneratedValue
     private int film_id;
-
     private String title;
 
-    public Film(String title){
+    public Film(String title, String rating){
         this.title=title;
     }
+
+    private String rating;
 
     public Film(){
 
     }
 
-    private  String rating;
-
+    public int getFilm_id() {
+        return film_id;
+    }
 
     public String getFilm() {
         return title;
-    }
-
-    public int getFilm_id() {
-        return film_id;
     }
 
     public void setFilm(String title) {

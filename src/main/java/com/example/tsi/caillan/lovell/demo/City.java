@@ -23,14 +23,14 @@ public class City {
 
     private int country_id;
 
+    public int getCity_id() {
+        return city_id;
+    }
 
     public String getCity() {
         return city;
     }
 
-    public int getCity_id() {
-        return city_id;
-    }
 
     public void setCity(String city) {
         this.city = city;
