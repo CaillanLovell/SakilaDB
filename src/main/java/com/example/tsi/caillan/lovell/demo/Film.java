@@ -10,17 +10,20 @@ public class Film {
     @Id
     @GeneratedValue
     private int film_id;
+
     private String title;
 
-    public Film(String title, String rating){
+    private int releaseYear;
+
+    public Film(String title){
         this.title=title;
     }
-
-    private String rating;
 
     public Film(){
 
     }
+
+    private String rating;
 
     public int getFilm_id() {
         return film_id;
@@ -32,6 +35,14 @@ public class Film {
 
     public void setFilm(String title) {
         this.title = title;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getRating() {
