@@ -3,6 +3,7 @@ package com.example.tsi.caillan.lovell.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
@@ -36,33 +37,58 @@ public class SakilaMoviesDbApplication {
 		SpringApplication.run(SakilaMoviesDbApplication.class, args);
 	}
 
-	@GetMapping("/AllLanguages")
+	@PostMapping("/Languages")
+	Language createLanguage(@Validated @RequestBody Language newLanguage) {
+		return languageRepository.save(newLanguage);
+	}
+
+	@GetMapping("/Languages")
 	public @ResponseBody
 	Iterable<Language> getAllLanguages(){
 		return languageRepository.findAll();
 	}
 
-	@GetMapping("/AllActors")
+	@GetMapping("/Actors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors(){
 		return actorRepository.findAll();
 	}
 
-	@GetMapping("/AllCities")
+	@PostMapping("/Actors")
+	Actor createActor(@Validated @RequestBody Actor newActor) {
+		return actorRepository.save(newActor);
+	}
+
+	@GetMapping("/Cities")
 	public @ResponseBody
 	Iterable<City> getAllCities(){
 		return cityRepository.findAll();
 	}
 
-	@GetMapping("/AllFilms")
+	@PostMapping("/Cities")
+	City createCity(@Validated @RequestBody City newCity) {
+		return cityRepository.save(newCity);
+	}
+
+	@GetMapping("/Films")
 	public @ResponseBody
 	Iterable<Film> getAllFilms(){
 		return filmRepository.findAll();
 	}
 
-	@GetMapping("/AllCategories")
+	@PostMapping("/Films")
+	Film createFilm(@Validated @RequestBody Film newFilm) {
+		return filmRepository.save(newFilm);
+	}
+
+	@GetMapping("/Categories")
 	public @ResponseBody
 	Iterable<Category> getAllCategories(){
 		return categoryRepository.findAll();
+	}
+
+	@PostMapping("/Categories")
+	Category createCategory(@Validated @RequestBody Category newCategory) {
+		return categoryRepository.save(newCategory);
 	}
 }
