@@ -21,36 +21,36 @@ public class SakilaMoviesDbApplication {
 	private FilmRepository filmRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	private String save = "save";
 
-	public SakilaMoviesDbApplication(LanguageRepository languageRepository, ActorRepository actorRepository,
-									 CityRepository cityRepository, FilmRepository filmRepository,
-									 CategoryRepository categoryRepository){
-		this.languageRepository= languageRepository;
+	public SakilaMoviesDbApplication() {
+		this.languageRepository = languageRepository;
 		this.actorRepository = actorRepository;
-		this.cityRepository=cityRepository;
+		this.cityRepository = cityRepository;
 		this.filmRepository = filmRepository;
 		this.categoryRepository = categoryRepository;
 	}
-
-	public static void main(String[] args){
-
+	public static void main(String[] args) {
 		SpringApplication.run(SakilaMoviesDbApplication.class, args);
 	}
 
-	@PostMapping("/Languages")
-	Language createLanguage(@Validated @RequestBody Language newLanguage) {
-		return languageRepository.save(newLanguage);
+	@PostMapping("/addLanguages")
+	public @ResponseBody
+	String addLanguage(@RequestParam String name) {
+		Language addLanguage = new Language(name);
+		languageRepository.save(addLanguage);
+		return save;
 	}
 
 	@GetMapping("/Languages")
 	public @ResponseBody
-	Iterable<Language> getAllLanguages(){
+	Iterable<Language> getAllLanguages() {
 		return languageRepository.findAll();
 	}
 
 	@GetMapping("/Actors")
 	public @ResponseBody
-	Iterable<Actor> getAllActors(){
+	Iterable<Actor> getAllActors() {
 		return actorRepository.findAll();
 	}
 
@@ -61,18 +61,21 @@ public class SakilaMoviesDbApplication {
 
 	@GetMapping("/Cities")
 	public @ResponseBody
-	Iterable<City> getAllCities(){
+	Iterable<City> getAllCities() {
 		return cityRepository.findAll();
 	}
 
-	@PostMapping("/Cities")
-	City createCity(@Validated @RequestBody City newCity) {
-		return cityRepository.save(newCity);
+	@PostMapping("/addCities")
+	public @ResponseBody
+	String addCities(@RequestParam String name) {
+		City addCity = new City(name);
+		cityRepository.save(addCity);
+		return save;
 	}
 
 	@GetMapping("/Films")
 	public @ResponseBody
-	Iterable<Film> getAllFilms(){
+	Iterable<Film> getAllFilms() {
 		return filmRepository.findAll();
 	}
 
@@ -81,14 +84,21 @@ public class SakilaMoviesDbApplication {
 		return filmRepository.save(newFilm);
 	}
 
+	@PostMapping("/addCategories")
+	public @ResponseBody
+	String addCategory(@RequestParam String name) {
+		Category addCategory = new Category(name);
+		categoryRepository.save(addCategory);
+		return save;
+	}
+//	Category createCategory(@Validated @RequestBody Category newCategory) {
+//		return categoryRepository.save(newCategory);
+//}
+
 	@GetMapping("/Categories")
 	public @ResponseBody
 	Iterable<Category> getAllCategories(){
 		return categoryRepository.findAll();
 	}
 
-	@PostMapping("/Categories")
-	Category createCategory(@Validated @RequestBody Category newCategory) {
-		return categoryRepository.save(newCategory);
-	}
 }
