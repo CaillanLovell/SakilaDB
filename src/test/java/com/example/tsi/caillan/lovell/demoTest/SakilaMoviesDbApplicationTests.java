@@ -20,6 +20,7 @@ class SakilaMoviesDbApplicationTests {
     private int film_id;
     private int release_year;
     private int language_id;
+    private int idtest;
 
     @Test
     public void test_getLanguage(){
@@ -73,5 +74,11 @@ class SakilaMoviesDbApplicationTests {
     public void test_getLanguage_id(){
         film.getLanguage_id();
         assertEquals(language_id, film.getLanguage_id());
+    }
+
+    @Test
+    public void test_setLanguage_id(){
+        film.setLanguage_id(idtest);
+        assertEquals(idtest, film.getLanguage_id());
     }
 }
