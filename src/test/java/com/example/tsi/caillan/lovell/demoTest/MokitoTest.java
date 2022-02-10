@@ -43,5 +43,16 @@ public class MokitoTest {
         Assertions.assertEquals(expected, actual, "Data hasnt been added");
     }
 
+    @Test
+    public void testAddCategories(){
+        Category saveCategory = new Category("testcategory");
+        String expected = "save";
+            String actual = sakilaMoviesDbApplication.addCategory(saveCategory.getCategory());
+        ArgumentCaptor<Category>categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(categoryArgumentCaptor.capture());
+        categoryArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
+
 
 }
