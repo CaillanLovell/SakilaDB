@@ -20,7 +20,7 @@ class SakilaMoviesDbApplicationTests {
     private int film_id;
     private int release_year;
     private int language_id;
-    private int idtest;
+    private String rating;
 
     @Test
     public void test_getLanguage(){
@@ -71,6 +71,24 @@ class SakilaMoviesDbApplicationTests {
     }
 
     @Test
+    public void test_setRelease_year(){
+        film.setLanguage_id(release_year);
+        assertEquals(release_year, film.getRelease_year());
+    }
+
+    @Test
+    public void test_getRating(){
+        film.getRating();
+        assertEquals(rating, film.getRating());
+    }
+
+    @Test
+    public void test_setRating(){
+        film.setRating(rating);
+        assertEquals(rating, film.getRating());
+    }
+
+    @Test
     public void test_getLanguage_id(){
         film.getLanguage_id();
         assertEquals(language_id, film.getLanguage_id());
@@ -78,7 +96,7 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_setLanguage_id(){
-        film.setLanguage_id(idtest);
-        assertEquals(idtest, film.getLanguage_id());
+        film.setLanguage_id(language_id);
+        assertEquals(language_id, film.getLanguage_id());
     }
 }
