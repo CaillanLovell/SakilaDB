@@ -26,7 +26,8 @@ public class SakilaMoviesDbApplication {
 	public SakilaMoviesDbApplication(LanguageRepository languageRepository,
 									 FilmRepository filmRepository,
 									 ActorRepository actorRepository,
-									 CategoryRepository categoryRepository, CityRepository cityRepository) {
+									 CategoryRepository categoryRepository,
+									 CityRepository cityRepository) {
 		this.languageRepository = languageRepository;
 		this.actorRepository = actorRepository;
 		this.cityRepository = cityRepository;
