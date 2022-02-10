@@ -1,18 +1,25 @@
 package com.example.tsi.caillan.lovell.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Actor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int actor_id;
 
     private String first_name;
     private String last_name;
+
+    @ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Film> film = new HashSet<>();
+
 
     public Actor(String first_name, String last_name){
         this.first_name=first_name;

@@ -17,6 +17,9 @@ class SakilaMoviesDbApplicationTests {
     private Film film = new Film();
     private City city = new City();
     private Actor actor = new Actor();
+    private int film_id;
+    private int release_year;
+    private int language_id;
 
     @Test
     public void test_getLanguage(){
@@ -53,5 +56,22 @@ class SakilaMoviesDbApplicationTests {
 
     }
 
+    @Test
+    public void test_getfilmid(){
+        film.getFilm_id();
+        assertEquals(film_id, film.getFilm_id());
 
+    }
+
+    @Test
+    public void test_getRelease_year(){
+        film.getRelease_year();
+        assertEquals(release_year, film.getRelease_year());
+    }
+
+    @Test
+    public void test_getLanguage_id(){
+        film.getLanguage_id();
+        assertEquals(language_id, film.getLanguage_id());
+    }
 }
