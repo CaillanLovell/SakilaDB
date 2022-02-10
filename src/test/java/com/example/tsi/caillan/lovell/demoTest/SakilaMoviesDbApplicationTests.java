@@ -27,8 +27,8 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_getfilm(){
-        film.setFilm("testfilm");
-        assertEquals("testfilm",film.getFilm());
+        film.setTitle("testfilm");
+        assertEquals("testfilm",film.getTitle());
 
     }
 

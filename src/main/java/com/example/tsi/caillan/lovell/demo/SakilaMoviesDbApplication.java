@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
@@ -58,9 +60,19 @@ public class SakilaMoviesDbApplication {
 		return actorRepository.findAll();
 	}
 
-	@PostMapping("/Actors")
-	Actor createActor(@Validated @RequestBody Actor newActor) {
-		return actorRepository.save(newActor);
+	@GetMapping("/findActors/{actor_id}")
+	public @ResponseBody
+	Optional<Actor> getActorByID(@PathVariable int actor_id){
+
+		return actorRepository.findById(actor_id);
+	}
+
+	@PostMapping("/addActors")
+	public @ResponseBody
+	String addActor(@RequestParam String first_name, String last_name){
+		Actor addActor = new Actor(first_name,last_name);
+		actorRepository.save(addActor);
+		return save;
 	}
 
 	@GetMapping("/Cities")
@@ -83,9 +95,12 @@ public class SakilaMoviesDbApplication {
 		return filmRepository.findAll();
 	}
 
-	@PostMapping("/Films")
-	Film createFilm(@Validated @RequestBody Film newFilm) {
-		return filmRepository.save(newFilm);
+	@PostMapping("/addFilms")
+	public @ResponseBody
+	String addFilms(@RequestParam int release_year, String rating, String title, int language_id){
+		Film addFilms = new Film(release_year, rating, title, language_id);
+		filmRepository.save(addFilms);
+		return save;
 	}
 
 	@PostMapping("/addCategories")
@@ -95,9 +110,7 @@ public class SakilaMoviesDbApplication {
 		categoryRepository.save(addCategory);
 		return save;
 	}
-//	Category createCategory(@Validated @RequestBody Category newCategory) {
-//		return categoryRepository.save(newCategory);
-//}
+
 
 	@GetMapping("/Categories")
 	public @ResponseBody
