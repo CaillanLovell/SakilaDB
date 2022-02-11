@@ -14,7 +14,6 @@ public class Review {
     private String review;
 
     public Review(int film_id, String review){
-        this.review_id=review_id;
         this.film_id= film_id;
         this.review = review;
     }
