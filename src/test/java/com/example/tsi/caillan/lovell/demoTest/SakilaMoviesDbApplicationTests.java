@@ -72,7 +72,7 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_setRelease_year(){
-        film.setLanguage_id(release_year);
+        film.setRelease_year(release_year);
         assertEquals(release_year, film.getRelease_year());
     }
 

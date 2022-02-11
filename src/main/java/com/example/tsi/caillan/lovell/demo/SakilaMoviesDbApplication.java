@@ -1,11 +1,14 @@
 package com.example.tsi.caillan.lovell.demo;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -24,6 +27,7 @@ public class SakilaMoviesDbApplication {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	private String save = "save";
+	private String deleted = "deleted";
 
 	public SakilaMoviesDbApplication(LanguageRepository languageRepository,
 									 FilmRepository filmRepository,
@@ -54,6 +58,16 @@ public class SakilaMoviesDbApplication {
 		return languageRepository.findAll();
 	}
 
+	@DeleteMapping ("/removeLanguages/{language_id}")
+	public Map <String, Boolean> deleteLanguage (@PathVariable(value = "language_id") int language_id)
+			throws ResourceNotFoundException {
+		Language language = languageRepository.findById(language_id).orElseThrow(() ->new ResourceNotFoundException("Language not found"));
+		languageRepository.delete(language);
+		Map<String,Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return response;
+	}
+
 	@GetMapping("/Actors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors() {
@@ -74,6 +88,16 @@ public class SakilaMoviesDbApplication {
 		actorRepository.save(addActor);
 		return save;
 	}
+
+//	@DeleteMapping ("/removeActors/{actor_id}")
+//	public Map <String, Boolean> deleteActor (@PathVariable(value = "actor_id") int actor_id)
+//	throws ResourceNotFoundException {
+//		Actor actor = actorRepository.findById(actor_id).orElseThrow(() ->new ResourceNotFoundException("Actor not found"));
+//		actorRepository.delete(actor);
+//		Map<String,Boolean> response = new HashMap<>();
+//		response.put("deleted", Boolean.TRUE);
+//		return response;
+//	}
 
 	@GetMapping("/Cities")
 	public @ResponseBody
@@ -102,6 +126,16 @@ public class SakilaMoviesDbApplication {
 		filmRepository.save(addFilms);
 		return save;
 	}
+
+//	@DeleteMapping ("/removeFilms/{film_id}")
+//	public Map <String, Boolean> deleteFilm (@PathVariable(value = "film_id") int film_id)
+//			throws ResourceNotFoundException {
+//		Film film = filmRepository.findById(film_id).orElseThrow(() ->new ResourceNotFoundException("Film not found"));
+//		filmRepository.delete(film);
+//		Map<String,Boolean> response = new HashMap<>();
+//		response.put("deleted", Boolean.TRUE);
+//		return response;
+//	}
 
 	@PostMapping("/addCategories")
 	public @ResponseBody

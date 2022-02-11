@@ -30,7 +30,7 @@ public class Category {
         return name;
     }
 
-    public void setFilm(String name) {
+    public void setCategory(String name) {
         this.name = name;
     }
 

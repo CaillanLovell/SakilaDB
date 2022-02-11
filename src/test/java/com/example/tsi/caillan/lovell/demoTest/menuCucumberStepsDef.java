@@ -77,13 +77,39 @@ public class menuCucumberStepsDef {
     @Given("I want to add a category")
     public void i_want_to_add_a_category() {
         setup();
-        savedLanguage = new Language("test language");
+        savedCategory = new Category("test category");
     }
 
     String proper;
-    @When("I put a post request to add the language")
+    @When("I put a post request to add the category")
     public void i_put_a_post_request_to_add_the_category() {
         proper = sakila.addCategory(savedCategory.getCategory());
+    }
+
+
+    @Then("I should have returned {string}")
+    public void i_should_have_returned(String save) {
+
+        String expected = "save";
+        Assertions.assertEquals(expected, actual, "Save failed");
+
+        // Verify that the save occured
+        ArgumentCaptor<Category>categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(categoryArgumentCaptor.capture());
+        categoryArgumentCaptor.getValue();
+    }
+
+    Actor savedActor;
+    @Given("I want to add an actor")
+    public void i_want_to_add_an_actor() {
+        setup();
+        savedActor = new Actor("test first name", "test last name");
+    }
+
+    String example;
+    @When("I put a post request to add an actor")
+    public void i_put_a_post_request_to_add_an_actor() {
+        example = sakila.addActor(savedActor.getFirst_name(), savedActor.getLast_name());
     }
 
 
@@ -91,7 +117,7 @@ public class menuCucumberStepsDef {
     public void i_have_returned(String save) {
 
         String expected = "save";
-        Assertions.assertEquals(expected, actual, "Save failed");
+        Assertions.assertEquals(expected, example, "Save failed");
 
         // Verify that the save occured
         ArgumentCaptor<Category>categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
