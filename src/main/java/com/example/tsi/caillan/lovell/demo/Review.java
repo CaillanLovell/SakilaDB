@@ -1,9 +1,9 @@
 package com.example.tsi.caillan.lovell.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Review {
@@ -12,6 +12,12 @@ public class Review {
     private int review_id;
     private int film_id;
     private String review;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn (name = "film_id", referencedColumnName = "film_id",
+            updatable = false, insertable = false)
+    private Film film;
 
     public Review(int film_id, String review){
         this.film_id= film_id;
@@ -40,5 +46,13 @@ public class Review {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
     }
 }

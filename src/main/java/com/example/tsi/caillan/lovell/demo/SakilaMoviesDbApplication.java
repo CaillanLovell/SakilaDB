@@ -44,6 +44,7 @@ public class SakilaMoviesDbApplication {
 		this.categoryRepository = categoryRepository;
 		this.reviewRepository = reviewRepository;
 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaMoviesDbApplication.class, args);
 	}
@@ -62,12 +63,12 @@ public class SakilaMoviesDbApplication {
 		return languageRepository.findAll();
 	}
 
-	@DeleteMapping ("/removeLanguages/{language_id}")
-	public Map <String, Boolean> deleteLanguage (@PathVariable(value = "language_id") int language_id)
+	@DeleteMapping("/removeLanguages/{language_id}")
+	public Map<String, Boolean> deleteLanguage(@PathVariable(value = "language_id") int language_id)
 			throws ResourceNotFoundException {
-		Language language = languageRepository.findById(language_id).orElseThrow(() ->new ResourceNotFoundException("Language not found"));
+		Language language = languageRepository.findById(language_id).orElseThrow(() -> new ResourceNotFoundException("Language not found"));
 		languageRepository.delete(language);
-		Map <String,Boolean> response = new HashMap<>();
+		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return response;
 	}
@@ -80,15 +81,15 @@ public class SakilaMoviesDbApplication {
 
 	@GetMapping("/findActors/{actor_id}")
 	public @ResponseBody
-	Optional<Actor> getActorByID(@PathVariable int actor_id){
+	Optional<Actor> getActorByID(@PathVariable int actor_id) {
 
 		return actorRepository.findById(actor_id);
 	}
 
 	@PostMapping("/addActors")
 	public @ResponseBody
-	String addActor(@RequestParam String first_name, String last_name){
-		Actor addActor = new Actor(first_name,last_name);
+	String addActor(@RequestParam String first_name, String last_name) {
+		Actor addActor = new Actor(first_name, last_name);
 		actorRepository.save(addActor);
 		return save;
 	}
@@ -125,10 +126,17 @@ public class SakilaMoviesDbApplication {
 
 	@PostMapping("/addFilms")
 	public @ResponseBody
-	String addFilms(@RequestParam int release_year, String rating, String title, int language_id){
+	String addFilms(@RequestParam int release_year, String rating, String title, int language_id) {
 		Film addFilms = new Film(release_year, rating, title, language_id);
 		filmRepository.save(addFilms);
 		return save;
+	}
+
+	@GetMapping("/findFilms/{film_id}")
+	public @ResponseBody
+	Optional<Film> getFilmByID(@PathVariable int film_id) {
+
+		return filmRepository.findById(film_id);
 	}
 
 //	@DeleteMapping ("/removeFilms/{film_id}")
@@ -152,7 +160,7 @@ public class SakilaMoviesDbApplication {
 
 	@GetMapping("/Categories")
 	public @ResponseBody
-	Iterable<Category> getAllCategories(){
+	Iterable<Category> getAllCategories() {
 		return categoryRepository.findAll();
 	}
 
@@ -168,6 +176,12 @@ public class SakilaMoviesDbApplication {
 		Review addReview = new Review(film_id, review);
 		reviewRepository.save(addReview);
 		return save;
+	}
+
+	@GetMapping("/findReviews/{film_id}")
+	public @ResponseBody
+	Optional<Review> getReviewByID(@PathVariable (value = "film_id") int film_id){
+		return reviewRepository.findById(film_id);
 	}
 }
 

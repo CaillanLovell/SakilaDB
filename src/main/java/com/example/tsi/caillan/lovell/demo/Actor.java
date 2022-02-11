@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "actor")
 public class Actor {
 
     @Id
@@ -20,17 +21,23 @@ public class Actor {
     @JsonIgnore
     private Set<Film> film = new HashSet<>();
 
-    public Set<Film> getFilms() {
+    public Set<Film> getFilm() {
         return film;
     }
-    public void setFilms(Set<Film> films) {
-        this.film = films;
+    public void setFilm(Set<Film> film) {
+        this.film = film;
     }
 
 
     public Actor(String first_name, String last_name){
         this.first_name=first_name;
         this.last_name=last_name;
+    }
+
+    public Actor(String first_name, String last_name, Set<Film> film_id) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.film = film_id;
     }
 
     public Actor(){

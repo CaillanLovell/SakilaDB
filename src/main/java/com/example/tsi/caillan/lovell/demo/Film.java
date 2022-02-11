@@ -1,8 +1,12 @@
 package com.example.tsi.caillan.lovell.demo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,9 +36,6 @@ public class Film {
 
     }
 
-    @ManyToOne
-    @JoinColumn (name = "language_id", insertable = false, updatable = false)
-    private Language language;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_actor",
@@ -47,13 +48,22 @@ public class Film {
 
     private Set<Actor> actor = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn (name = "language_id", insertable = false, updatable = false)
+    private Language language;
 
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
+    public void addActor(Actor actor){
+
+    }
     public Set<Actor> getActor() {
         return actor;
     }
 
-    public void setActors(Set<Actor> actors) {
-        this.actor = actors;
+    public void setActor(Set<Actor> actor) {
+        this.actor = actor;
     }
 
     public int getFilm_id() {
@@ -90,5 +100,13 @@ public class Film {
 
     public void setLanguage_id(int language_id) {
         this.language_id = language_id;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
