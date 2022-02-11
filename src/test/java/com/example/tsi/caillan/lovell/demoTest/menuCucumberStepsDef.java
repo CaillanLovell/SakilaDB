@@ -23,7 +23,7 @@ public class menuCucumberStepsDef {
 
     private SakilaMoviesDbApplication sakila;
     @Mock
-    private LanguageRepository languageRepo; // Fake language table
+    private LanguageRepository languageRepository; // Fake language table
 
     @Mock
     private FilmRepository filmRepository;
@@ -32,19 +32,24 @@ public class menuCucumberStepsDef {
     private ActorRepository actorRepository;
 
     @Mock
-    private CityRepository cityrepository;
+    private CityRepository cityRepository;
 
     @Mock
     private CategoryRepository categoryRepository;
 
+    @Mock
+    private ReviewRepository reviewRepository;
+
     @BeforeEach
     void setup()
     {
-        languageRepo = mock(LanguageRepository.class);
+        languageRepository = mock(LanguageRepository.class);
         actorRepository = mock(ActorRepository.class);
         filmRepository = mock(FilmRepository.class);
         categoryRepository = mock(CategoryRepository.class);
-        sakila = new SakilaMoviesDbApplication(languageRepo, filmRepository, actorRepository, categoryRepository, cityrepository);
+        reviewRepository = mock(ReviewRepository.class);
+        cityRepository = mock(CityRepository.class);
+        sakila = new SakilaMoviesDbApplication(languageRepository, filmRepository, actorRepository, categoryRepository, cityRepository, reviewRepository);
     }
 
     Language savedLanguage;
@@ -69,7 +74,7 @@ public class menuCucumberStepsDef {
 
         // Verify that the save occured
         ArgumentCaptor<Language> languageArgumentCaptor = ArgumentCaptor.forClass(Language.class);
-        verify(languageRepo).save(languageArgumentCaptor.capture());
+        verify(languageRepository).save(languageArgumentCaptor.capture());
         languageArgumentCaptor.getValue();
     }
 

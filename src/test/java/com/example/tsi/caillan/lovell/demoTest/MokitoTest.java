@@ -23,13 +23,16 @@ public class MokitoTest {
     private CategoryRepository categoryRepository;
     @Mock
     private FilmRepository filmRepository;
+    @Mock
+    private ReviewRepository reviewRepository;
     @BeforeEach
     void Setup(){
         sakilaMoviesDbApplication = new SakilaMoviesDbApplication(languageRepository,
                 filmRepository,
                 actorRepository,
                 categoryRepository,
-                cityRepository);
+                cityRepository,
+                reviewRepository);
     }
 
     @Test

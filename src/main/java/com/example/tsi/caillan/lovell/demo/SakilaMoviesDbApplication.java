@@ -26,6 +26,8 @@ public class SakilaMoviesDbApplication {
 	private FilmRepository filmRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private ReviewRepository reviewRepository;
 	private String save = "save";
 	private String deleted = "deleted";
 
@@ -33,12 +35,14 @@ public class SakilaMoviesDbApplication {
 									 FilmRepository filmRepository,
 									 ActorRepository actorRepository,
 									 CategoryRepository categoryRepository,
-									 CityRepository cityRepository) {
+									 CityRepository cityRepository,
+									 ReviewRepository reviewRepository) {
 		this.languageRepository = languageRepository;
 		this.actorRepository = actorRepository;
 		this.cityRepository = cityRepository;
 		this.filmRepository = filmRepository;
 		this.categoryRepository = categoryRepository;
+		this.reviewRepository = reviewRepository;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(SakilaMoviesDbApplication.class, args);
@@ -63,7 +67,7 @@ public class SakilaMoviesDbApplication {
 			throws ResourceNotFoundException {
 		Language language = languageRepository.findById(language_id).orElseThrow(() ->new ResourceNotFoundException("Language not found"));
 		languageRepository.delete(language);
-		Map<String,Boolean> response = new HashMap<>();
+		Map <String,Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return response;
 	}
@@ -152,4 +156,18 @@ public class SakilaMoviesDbApplication {
 		return categoryRepository.findAll();
 	}
 
+	@GetMapping("/Reviews")
+	public @ResponseBody
+	Iterable<Review> getAllLReviews() {
+		return reviewRepository.findAll();
+	}
+
+	@PostMapping("/addReviews")
+	public @ResponseBody
+	String addReview(@RequestParam int film_id, String review) {
+		Review addReview = new Review(film_id, review);
+		reviewRepository.save(addReview);
+		return save;
+	}
 }
+
