@@ -20,6 +20,13 @@ public class Actor {
     @JsonIgnore
     private Set<Film> film = new HashSet<>();
 
+    public Set<Film> getFilms() {
+        return film;
+    }
+    public void setFilms(Set<Film> films) {
+        this.film = films;
+    }
+
 
     public Actor(String first_name, String last_name){
         this.first_name=first_name;
