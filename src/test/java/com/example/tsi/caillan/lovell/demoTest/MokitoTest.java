@@ -57,5 +57,16 @@ public class MokitoTest {
         Assertions.assertEquals(expected, actual, "Data hasnt been added");
     }
 
+    @Test
+    public void testAddReviews(){
+        Review saveReview = new Review (1, "testreview", 5.0);
+        String expected = "save";
+        String actual = sakilaMoviesDbApplication.addReview(saveReview.getReview_id(), saveReview.getReview(), saveReview.getReview_rating());
+        ArgumentCaptor<Review>reviewArgumentCaptor = ArgumentCaptor.forClass(Review.class);
+        verify(reviewRepository).save(reviewArgumentCaptor.capture());
+        reviewArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
+
 
 }
