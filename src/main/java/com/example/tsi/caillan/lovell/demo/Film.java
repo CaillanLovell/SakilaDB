@@ -55,8 +55,8 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-    public void addActor(Actor actor){
-    }
+//    public void addActor(Actor actor){
+//    }
     public Set<Actor> getActor() {
         return actor;
     }
