@@ -1,16 +1,26 @@
 package com.example.tsi.caillan.lovell.demo;
 
-import org.apache.velocity.exception.ResourceNotFoundException;
+import com.amazonaws.services.secretsmanager.model.DecryptionFailureException;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
+import com.amazonaws.services.secretsmanager.model.InternalServiceErrorException;
+import com.amazonaws.services.secretsmanager.model.InvalidRequestException;
+import org.apache.maven.plugin.descriptor.InvalidParameterException;
+//import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.synth.Region;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
 @RestController
 @RequestMapping("/Home")
@@ -63,15 +73,15 @@ public class SakilaMoviesDbApplication {
 		return languageRepository.findAll();
 	}
 
-	@DeleteMapping("/removeLanguages/{language_id}")
-	public Map<String, Boolean> deleteLanguage(@PathVariable(value = "language_id") int language_id)
-			throws ResourceNotFoundException {
-		Language language = languageRepository.findById(language_id).orElseThrow(() -> new ResourceNotFoundException("Language not found"));
-		languageRepository.delete(language);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return response;
-	}
+//	@DeleteMapping("/removeLanguages/{language_id}")
+//	public Map<String, Boolean> deleteLanguage(@PathVariable(value = "language_id") int language_id)
+//			throws ResourceNotFoundException {
+//		Language language = languageRepository.findById(language_id).orElseThrow(() -> new ResourceNotFoundException("Language not found"));
+//		languageRepository.delete(language);
+//		Map<String, Boolean> response = new HashMap<>();
+//		response.put("deleted", Boolean.TRUE);
+//		return response;
+//	}
 
 	@GetMapping("/Actors")
 	public @ResponseBody
@@ -172,8 +182,8 @@ public class SakilaMoviesDbApplication {
 
 	@PostMapping("/addReviews")
 	public @ResponseBody
-	String addReview(@RequestParam int film_id, String review) {
-		Review addReview = new Review(film_id, review);
+	String addReview(@RequestParam int film_id, String review, Double rating) {
+		Review addReview = new Review(film_id, review, rating);
 		reviewRepository.save(addReview);
 		return save;
 	}

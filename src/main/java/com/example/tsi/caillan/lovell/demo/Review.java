@@ -12,6 +12,7 @@ public class Review {
     private int review_id;
     private int film_id;
     private String review;
+    private double review_rating;
 
     @ManyToOne
     @JsonIgnore
@@ -19,9 +20,10 @@ public class Review {
             updatable = false, insertable = false)
     private Film film;
 
-    public Review(int film_id, String review){
+    public Review(int film_id, String review, double review_rating){
         this.film_id= film_id;
         this.review = review;
+        this.review_rating = review_rating;
     }
 
     public Review(){
@@ -48,11 +50,11 @@ public class Review {
         this.review = review;
     }
 
-    public Film getFilm() {
-        return film;
+    public double getReview_rating() {
+        return review_rating;
     }
 
-    public void setFilm(Film film) {
-        this.film = film;
+    public void setReview_rating(double review_rating) {
+        this.review_rating = review_rating;
     }
 }
