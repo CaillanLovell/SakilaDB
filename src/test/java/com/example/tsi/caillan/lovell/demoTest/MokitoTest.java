@@ -68,5 +68,37 @@ public class MokitoTest {
         Assertions.assertEquals(expected, actual, "Data hasnt been added");
     }
 
+    @Test
+    public void testAddActors(){
+        Actor saveActor = new Actor ("testfirstname", "testlastname");
+        String expected = "save";
+        String actual = sakilaMoviesDbApplication.addActor(saveActor.getFirst_name(), saveActor.getLast_name());
+        ArgumentCaptor<Actor>actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepository).save(actorArgumentCaptor.capture());
+        actorArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
+
+    @Test
+    public void testAddCities(){
+        City saveCity = new City ("testcity");
+        String expected = "save";
+        String actual = sakilaMoviesDbApplication.addCities(saveCity.getCity());
+        ArgumentCaptor<City>cityArgumentCaptor = ArgumentCaptor.forClass(City.class);
+        verify(cityRepository).save(cityArgumentCaptor.capture());
+        cityArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
+
+    @Test
+    public void testAddFilms(){
+        Film saveFilm = new Film (1999,  "PG", "filmtitle", 1);
+        String expected = "save";
+        String actual = sakilaMoviesDbApplication.addFilms(saveFilm.getRelease_year(), saveFilm.getRating(),saveFilm.getTitle(), saveFilm.getLanguage_id());
+        ArgumentCaptor<Film>filmArgumentCaptor = ArgumentCaptor.forClass(Film.class);
+        verify(filmRepository).save(filmArgumentCaptor.capture());
+        filmArgumentCaptor.getValue();
+        Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
 
 }
