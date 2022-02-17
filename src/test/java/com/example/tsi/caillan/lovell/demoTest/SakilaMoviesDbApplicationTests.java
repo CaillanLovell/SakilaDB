@@ -147,4 +147,15 @@ class SakilaMoviesDbApplicationTests {
         assertEquals(testActor, film.getActor());
     }
 
+    @Test
+    public void test_getFilminLanguage(){
+        language.setFilm(testFilm);
+        assertEquals(testFilm, language.getFilm());
+    }
+
+    @Test
+    public void test_languageid(){
+        assertEquals(language_id, language.getLanguage_id());
+    }
+
 }
