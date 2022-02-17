@@ -8,6 +8,8 @@ import com.example.tsi.caillan.lovell.demo.Language;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,6 +23,7 @@ class SakilaMoviesDbApplicationTests {
     private int release_year;
     private int language_id;
     private String rating;
+    private List testreview;
 
     @Test
     public void test_getLanguage(){
@@ -99,4 +102,11 @@ class SakilaMoviesDbApplicationTests {
         film.setLanguage_id(language_id);
         assertEquals(language_id, film.getLanguage_id());
     }
+
+    @Test
+    public void test_getReviews(){
+        film.setReviews(testreview);
+        assertEquals(testreview, film.getReviews());
+    }
+
 }
