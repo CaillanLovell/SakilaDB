@@ -24,6 +24,7 @@ class SakilaMoviesDbApplicationTests {
     private int language_id;
     private String rating;
     private List testreview;
+    private String title;
 
     @Test
     public void test_getLanguage(){
@@ -43,7 +44,6 @@ class SakilaMoviesDbApplicationTests {
     public void test_getcity(){
         city.setCity("testcity");
         assertEquals("testcity",city.getCity());
-
     }
 
     @Test
@@ -107,6 +107,20 @@ class SakilaMoviesDbApplicationTests {
     public void test_getReviews(){
         film.setReviews(testreview);
         assertEquals(testreview, film.getReviews());
+    }
+
+    @Test
+    public void test_getactorid(){
+        assertEquals(0,actor.getActor_id());
+    }
+
+    @Test
+    public void test_Filmconstructor(){
+        Film testFilm = new Film(release_year, rating, title, language_id);
+        assertEquals(release_year, testFilm.getRelease_year());
+        assertEquals(rating, testFilm.getRating());
+        assertEquals(title, testFilm.getTitle());
+        assertEquals(language_id, testFilm.getLanguage_id());
     }
 
 }
