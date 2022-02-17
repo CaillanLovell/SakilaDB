@@ -136,11 +136,6 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_getFilminActor(){
-        assertEquals(testFilm, actor.getFilm());
-    }
-
-    @Test
-    public void test_setFilminActor(){
         actor.setFilm(testFilm);
         assertEquals(testFilm, actor.getFilm());
     }
