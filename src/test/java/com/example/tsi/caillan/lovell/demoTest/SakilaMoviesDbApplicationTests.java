@@ -29,6 +29,7 @@ class SakilaMoviesDbApplicationTests {
     private String testFirst_name;
     private String testLast_name;
     private Set testFilm;
+    private Set testActor;
 
     @Test
     public void test_getLanguage(){
@@ -138,6 +139,12 @@ class SakilaMoviesDbApplicationTests {
     public void test_getFilminActor(){
         actor.setFilm(testFilm);
         assertEquals(testFilm, actor.getFilm());
+    }
+
+    @Test
+    public void test_getActorinFilm(){
+        film.setActor(testActor);
+        assertEquals(testActor, film.getActor());
     }
 
 }
