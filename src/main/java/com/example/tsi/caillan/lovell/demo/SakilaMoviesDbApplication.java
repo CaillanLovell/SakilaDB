@@ -111,8 +111,6 @@ public class SakilaMoviesDbApplication {
 //		actorRepository.delete(actor);
 //		Map<String,Boolean> response = new HashMap<>();
 //		response.put("deleted", Boolean.TRUE);
-//		return response;
-/
 
 	@GetMapping("/Cities")
 	public @ResponseBody
