@@ -34,11 +34,11 @@ public class Actor {
         this.last_name=last_name;
     }
 
-    public Actor(String first_name, String last_name, Set<Film> film_id) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.film = film_id;
-    }
+//    public Actor(String first_name, String last_name, Set<Film> film_id) {
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.film = film_id;
+//    }
 
     public Actor(){
 

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,6 +26,9 @@ class SakilaMoviesDbApplicationTests {
     private String rating;
     private List testreview;
     private String title;
+    private String testFirst_name;
+    private String testLast_name;
+    private Set testFilm;
 
     @Test
     public void test_getLanguage(){
@@ -121,6 +125,24 @@ class SakilaMoviesDbApplicationTests {
         assertEquals(rating, testFilm.getRating());
         assertEquals(title, testFilm.getTitle());
         assertEquals(language_id, testFilm.getLanguage_id());
+    }
+
+    @Test
+    public void test_ActorConstructor(){
+        Actor testActor = new Actor(testFirst_name,testLast_name);
+        assertEquals(testFirst_name, testActor.getFirst_name());
+        assertEquals(testLast_name, testActor.getLast_name());
+    }
+
+    @Test
+    public void test_getFilminActor(){
+        assertEquals(testFilm, actor.getFilm());
+    }
+
+    @Test
+    public void test_setFilminActor(){
+        actor.setFilm(testFilm);
+        assertEquals(testFilm, actor.getFilm());
     }
 
 }
