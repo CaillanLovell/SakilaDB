@@ -117,4 +117,15 @@ public class MokitoTest {
         Assertions.assertEquals(languageList, sakilaMoviesDbApplication.getAllLanguages(), "Languages data was not retreived from Language database table.");
     }
 
+    @Test
+    public void testGetActors(){
+        Actor actor1 = new Actor("testfirstname", "testlastname");
+        Actor actor2 = new Actor("testfirstname", "testlastname");
+        List<Actor> actorList = new ArrayList<>();
+        actorList.add(actor1);
+        actorList.add(actor2);
+        when(sakilaMoviesDbApplication.getAllActors()).thenReturn(actorList);
+        Assertions.assertEquals(actorList, sakilaMoviesDbApplication.getAllActors(), "Actors data was not retreived from Actor database table.");
+    }
+
 }
