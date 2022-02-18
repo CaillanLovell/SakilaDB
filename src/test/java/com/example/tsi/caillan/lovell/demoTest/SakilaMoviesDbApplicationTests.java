@@ -1,10 +1,7 @@
 package com.example.tsi.caillan.lovell.demoTest;
 
 
-import com.example.tsi.caillan.lovell.demo.Actor;
-import com.example.tsi.caillan.lovell.demo.City;
-import com.example.tsi.caillan.lovell.demo.Film;
-import com.example.tsi.caillan.lovell.demo.Language;
+import com.example.tsi.caillan.lovell.demo.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -21,6 +18,7 @@ class SakilaMoviesDbApplicationTests {
     private Film film = new Film();
     private City city = new City();
     private Actor actor = new Actor();
+    private Category category = new Category();
     private int film_id;
     private int release_year;
     private int language_id;
@@ -29,6 +27,7 @@ class SakilaMoviesDbApplicationTests {
     private String title;
     private String testFirst_name;
     private String testLast_name;
+    private int category_id;
     private Set testFilm;
     private Set testActor;
 
@@ -154,6 +153,22 @@ class SakilaMoviesDbApplicationTests {
     @Test
     public void test_languageid(){
         assertEquals(language_id, language.getLanguage_id());
+    }
+
+    @Test
+    void emptyConstructorTest() {
+        assertTrue("This test has failed", category instanceof Category);
+    }
+
+    @Test
+    public void test_categoryid(){
+        assertEquals(category_id, category.getCategory_id());
+    }
+
+    @Test
+    public void test_getCategory(){
+        category.setCategory(rating);
+        assertEquals(rating, category.getCategory());
     }
 
 }
