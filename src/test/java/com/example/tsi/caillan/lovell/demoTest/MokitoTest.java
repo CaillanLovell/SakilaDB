@@ -128,4 +128,40 @@ public class MokitoTest {
         Assertions.assertEquals(actorList, sakilaMoviesDbApplication.getAllActors(), "Actors data was not retreived from Actor database table.");
     }
 
+    @Test
+    public void testGetFilms(){
+        Film film1 = new Film( 1999,"testrating", "testtitle", 1);
+        List<Film> filmList = new ArrayList<>();
+        filmList.add(film1);
+        when(sakilaMoviesDbApplication.getAllFilms()).thenReturn(filmList);
+        Assertions.assertEquals(filmList, sakilaMoviesDbApplication.getAllFilms(), "Actors data was not retreived from Actor database table.");
+    }
+
+    @Test
+    public void testGetCities(){
+        City city1 = new City("testcity");
+        List<City> cityList = new ArrayList<>();
+        cityList.add(city1);
+        when(sakilaMoviesDbApplication.getAllCities()).thenReturn(cityList);
+        Assertions.assertEquals(cityList, sakilaMoviesDbApplication.getAllCities(), "Actors data was not retreived from Actor database table.");
+    }
+
+    @Test
+    public void testGetCategories(){
+        Category category1 = new Category("testcategory");
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(category1);
+        when(sakilaMoviesDbApplication.getAllCategories()).thenReturn(categoryList);
+        Assertions.assertEquals(categoryList, sakilaMoviesDbApplication.getAllCategories(), "Actors data was not retreived from Actor database table.");
+    }
+
+    @Test
+    public void testGetReviews(){
+        Review review1 = new Review(1,"testreview",10.0);
+        List<Review> reviewList = new ArrayList<>();
+        reviewList.add(review1);
+        when(sakilaMoviesDbApplication.getAllReviews()).thenReturn(reviewList);
+        Assertions.assertEquals(reviewList, sakilaMoviesDbApplication.getAllReviews(), "Actors data was not retreived from Actor database table.");
+    }
+
 }

@@ -68,9 +68,7 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_getfilmid(){
-        film.getFilm_id();
         assertEquals(film_id, film.getFilm_id());
-
     }
 
     @Test
@@ -99,7 +97,6 @@ class SakilaMoviesDbApplicationTests {
 
     @Test
     public void test_getLanguage_id(){
-        film.getLanguage_id();
         assertEquals(language_id, film.getLanguage_id());
     }
 

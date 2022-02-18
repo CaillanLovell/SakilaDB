@@ -175,7 +175,7 @@ public class SakilaMoviesDbApplication {
 
 	@GetMapping("/Reviews")
 	public @ResponseBody
-	Iterable<Review> getAllLReviews() {
+	Iterable<Review> getAllReviews() {
 		return reviewRepository.findAll();
 	}
 
