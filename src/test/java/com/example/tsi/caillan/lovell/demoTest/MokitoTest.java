@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class MokitoTest {
@@ -162,6 +163,27 @@ public class MokitoTest {
         reviewList.add(review1);
         when(sakilaMoviesDbApplication.getAllReviews()).thenReturn(reviewList);
         Assertions.assertEquals(reviewList, sakilaMoviesDbApplication.getAllReviews(), "Actors data was not retreived from Actor database table.");
+    }
+
+    @Test
+    public void testGetFilmById(){
+        Film testFilm = new Film(1999, "testrating", "testtitle", 1);
+        when(sakilaMoviesDbApplication.getFilmByID(0)).thenReturn(Optional.of(testFilm));
+        Assertions.assertEquals(Optional.of(testFilm), sakilaMoviesDbApplication.getFilmByID(0), "This Film Id getting test has failed");
+    }
+
+    @Test
+    public void testGetReviewById(){
+        Review testReview = new Review(1999, "testrating", 10.0);
+        when(sakilaMoviesDbApplication.getReviewByID(0)).thenReturn(Optional.of(testReview));
+        Assertions.assertEquals(Optional.of(testReview), sakilaMoviesDbApplication.getReviewByID(0), "This Film Id getting test has failed");
+    }
+
+    @Test
+    public void testGetActorsById(){
+        Actor testActor = new Actor("testrating", "testtitle");
+        when(sakilaMoviesDbApplication.getActorByID(0)).thenReturn(Optional.of(testActor));
+        Assertions.assertEquals(Optional.of(testActor), sakilaMoviesDbApplication.getActorByID(0), "This Film Id getting test has failed");
     }
 
 }
