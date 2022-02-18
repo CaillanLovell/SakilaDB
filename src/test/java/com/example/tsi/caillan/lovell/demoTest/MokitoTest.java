@@ -1,6 +1,8 @@
 package com.example.tsi.caillan.lovell.demoTest;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.tsi.caillan.lovell.demo.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class MokitoTest {
@@ -99,6 +104,17 @@ public class MokitoTest {
         verify(filmRepository).save(filmArgumentCaptor.capture());
         filmArgumentCaptor.getValue();
         Assertions.assertEquals(expected, actual, "Data hasnt been added");
+    }
+
+    @Test
+    public void testGetLanguages(){
+        Language lang1 = new Language("Spanish");
+        Language lang2 = new Language("German");
+        List<Language> languageList = new ArrayList<>();
+        languageList.add(lang1);
+        languageList.add(lang2);
+        when(sakilaMoviesDbApplication.getAllLanguages()).thenReturn(languageList);
+        Assertions.assertEquals(languageList, sakilaMoviesDbApplication.getAllLanguages(), "Languages data was not retreived from Language database table.");
     }
 
 }
