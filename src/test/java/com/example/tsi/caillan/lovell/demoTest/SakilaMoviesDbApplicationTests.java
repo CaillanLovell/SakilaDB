@@ -171,4 +171,14 @@ class SakilaMoviesDbApplicationTests {
         assertEquals(rating, category.getCategory());
     }
 
+    @Test
+    public void test_getCountryid(){
+        city.setCountry_id(language_id);
+        assertEquals(language_id, city.getCountry_id());
+    }
+    @Test
+    public void test_getCityid(){
+        assertEquals(language_id, city.getCity_id());
+    }
+
 }
