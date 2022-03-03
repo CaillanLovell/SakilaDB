@@ -102,6 +102,7 @@ public class Film {
     }
 
     public List<Review> getReviews() {
+        System.out.println(reviews);
         return reviews;
     }
 

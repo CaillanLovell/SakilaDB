@@ -1,9 +1,6 @@
 package com.example.tsi.caillan.lovell.demo;
 
-import com.amazonaws.services.secretsmanager.model.DecryptionFailureException;
-import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
-import com.amazonaws.services.secretsmanager.model.InternalServiceErrorException;
-import com.amazonaws.services.secretsmanager.model.InvalidRequestException;
+import com.amazonaws.services.secretsmanager.model.*;
 import org.apache.maven.plugin.descriptor.InvalidParameterException;
 //import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +123,7 @@ public class SakilaMoviesDbApplication {
 		cityRepository.save(addCity);
 		return save;
 	}
-
+	@CrossOrigin(origins = "*")
 	@GetMapping("/Films")
 	public @ResponseBody
 	Iterable<Film> getAllFilms() {
@@ -179,6 +176,7 @@ public class SakilaMoviesDbApplication {
 		return reviewRepository.findAll();
 	}
 
+	@CrossOrigin(origins = "*")
 	@PostMapping("/addReviews")
 	public @ResponseBody
 	String addReview(@RequestParam int film_id, String review, Double rating) {
@@ -187,10 +185,34 @@ public class SakilaMoviesDbApplication {
 		return save;
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/findReviews/{film_id}")
 	public @ResponseBody
 	Optional<Review> getReviewByID(@PathVariable (value = "film_id") int film_id){
 		return reviewRepository.findById(film_id);
+	}
+
+	@CrossOrigin(origins = "*")
+	@DeleteMapping("/deleteReviews/{review_id}")
+	public @ResponseBody
+	String removeReviewByID(@PathVariable int review_id){
+		reviewRepository.deleteById(review_id);
+		return "The review with ID "+review_id +" has been deleted";
+	}
+
+	@CrossOrigin(origins = "*")
+	@PutMapping("/updateReviews/{review_id}")
+	public @ResponseBody
+	String updateReview(@PathVariable int review_id, @RequestParam String review, double rating){
+
+		Review updateReview = reviewRepository.findById(review_id).orElseThrow(() ->new ResourceNotFoundException("Review id not found"));
+
+		updateReview.setReview(review);
+		updateReview.setReview_rating(rating);
+		//Saving the updated info
+		final Review updatedReview = reviewRepository.save(updateReview);
+		//Returining updated record
+		return updatedReview.getReview() + updateReview.getReview_rating();
 	}
 }
 
