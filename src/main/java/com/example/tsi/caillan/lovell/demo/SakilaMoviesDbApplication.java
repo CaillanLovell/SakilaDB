@@ -123,7 +123,7 @@ public class SakilaMoviesDbApplication {
 		cityRepository.save(addCity);
 		return save;
 	}
-	@CrossOrigin(origins = "*")
+
 	@GetMapping("/Films")
 	public @ResponseBody
 	Iterable<Film> getAllFilms() {
@@ -176,7 +176,7 @@ public class SakilaMoviesDbApplication {
 		return reviewRepository.findAll();
 	}
 
-	@CrossOrigin(origins = "*")
+
 	@PostMapping("/addReviews")
 	public @ResponseBody
 	String addReview(@RequestParam int film_id, String review, Double rating) {
@@ -185,14 +185,14 @@ public class SakilaMoviesDbApplication {
 		return save;
 	}
 
-	@CrossOrigin(origins = "*")
+
 	@GetMapping("/findReviews/{film_id}")
 	public @ResponseBody
 	Optional<Review> getReviewByID(@PathVariable (value = "film_id") int film_id){
 		return reviewRepository.findById(film_id);
 	}
 
-	@CrossOrigin(origins = "*")
+
 	@DeleteMapping("/deleteReviews/{review_id}")
 	public @ResponseBody
 	String removeReviewByID(@PathVariable int review_id){
@@ -200,7 +200,6 @@ public class SakilaMoviesDbApplication {
 		return "The review with ID "+review_id +" has been deleted";
 	}
 
-	@CrossOrigin(origins = "*")
 	@PutMapping("/updateReviews/{review_id}")
 	public @ResponseBody
 	String updateReview(@PathVariable int review_id, @RequestParam String review, double rating){
